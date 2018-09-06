@@ -3,7 +3,7 @@ package com.loreca.eventplanner;
 import com.loreca.eventplanner.dto.DateDTO;
 
 public class DateCalculatorImpl implements DateCalculator {
-	
+
 	@Override
 	public boolean isLeapYear(final int year) {
 		return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
@@ -26,7 +26,7 @@ public class DateCalculatorImpl implements DateCalculator {
 	public int daysTillEndOfMonth(final int day, final int month, final int year) {
 		// One added to include the current day
 		int count = MONTHLY_DAY_COUNT.get(month) - day + 1;
-			
+
 		if (month == 2 && isLeapYear(year)) {
 			count++;
 		}
@@ -64,17 +64,28 @@ public class DateCalculatorImpl implements DateCalculator {
 	}
 
 	@Override
-	public int daysTillEndOfYear(DateDTO dateDto) {
+	public int daysFromStartOfYear(final int day, final int month, final int year) {
+		int count = (month - 1) >= 1 ? daysBetweenMonths(1, month - 1, year) + day : day;
+		return count;
+	}
+
+	@Override
+	public int daysFromStartOfYear(final DateDTO dateDto) {
+		return daysFromStartOfYear(dateDto.getDay(), dateDto.getMonth(), dateDto.getYear());
+	}
+
+	@Override
+	public int daysTillEndOfYear(final DateDTO dateDto) {
 		return daysTillEndOfYear(dateDto.getDay(), dateDto.getMonth(), dateDto.getYear());
 	}
 
 	@Override
-	public int daysTillEndOfMonth(DateDTO dateDto) {
+	public int daysTillEndOfMonth(final DateDTO dateDto) {
 		return daysTillEndOfMonth(dateDto.getDay(), dateDto.getMonth(), dateDto.getYear());
 	}
 
 	@Override
-	public int daysBetween(DateDTO startDate, DateDTO endDate) {
+	public int daysBetween(final DateDTO startDate, final DateDTO endDate) {
 		if (startDate.equals(endDate)) {
 			return 0;
 		} else if (startDate.getMonth() == endDate.getMonth() && startDate.getYear() == endDate.getYear()) {
@@ -89,10 +100,14 @@ public class DateCalculatorImpl implements DateCalculator {
 					: count;
 			return count;
 		} else {
-			int count = daysTillEndOfYear(startDate) + endDate.getDay() - 2;
+			// int count = daysTillEndOfYear(startDate) + endDate.getDay() - 2;
+
+			int count = daysTillEndOfYear(startDate) + daysFromStartOfYear(endDate) - 2;
+
 			count = endDate.getYear() - startDate.getYear() > 1
 					? count += daysBetweenYears(startDate.getYear() + 1, endDate.getYear() - 1) : count;
 			return count;
 		}
 	}
+
 }

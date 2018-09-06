@@ -29,6 +29,8 @@ public interface DateCalculator {
 	public boolean isLeapYear(final int year);
 
 	public int daysTillEndOfYear(final int day, final int month, final int year);
+	
+	public int daysFromStartOfYear(final int day, final int month, final int year);
 
 	public int daysTillEndOfMonth(final int day, final int month, final int year);
 
@@ -39,6 +41,8 @@ public interface DateCalculator {
 	public int daysTillEndOfYear(final DateDTO dateDto);
 
 	public int daysTillEndOfMonth(final DateDTO dateDto);
+	
+	public int daysFromStartOfYear(final DateDTO dateDto);
 
 	/*
 	 * This method will follow a process of elimination from most general case
