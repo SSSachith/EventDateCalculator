@@ -100,14 +100,10 @@ public class DateCalculatorImpl implements DateCalculator {
 					: count;
 			return count;
 		} else {
-			// int count = daysTillEndOfYear(startDate) + endDate.getDay() - 2;
-
 			int count = daysTillEndOfYear(startDate) + daysFromStartOfYear(endDate) - 2;
-
 			count = endDate.getYear() - startDate.getYear() > 1
 					? count += daysBetweenYears(startDate.getYear() + 1, endDate.getYear() - 1) : count;
 			return count;
 		}
 	}
-
 }

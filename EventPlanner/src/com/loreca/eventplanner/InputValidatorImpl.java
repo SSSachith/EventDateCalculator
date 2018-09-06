@@ -58,5 +58,4 @@ public class InputValidatorImpl implements InputValidator {
 
 		return day <= validMaxDays && day >= 1;
 	}
-
 }

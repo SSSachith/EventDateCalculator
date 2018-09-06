@@ -107,21 +107,18 @@ public class DateCalculatorTest {
 	public void givesCorrectNumberOfDaysWhenOnlyYearsAreEqual() {
 		assertEquals(dateCalculator.daysBetween(new DateDTO(1, 1, 1999), new DateDTO(10, 2, 1999)), 39);
 	}
-	
-	
+
 	@Test
 	public void givesCorrectNumberOfDaysFromStartOfTheYear() {
-		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(1, 1, 1999)),1);
-		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(2, 1, 1999)),2);
-		
+		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(1, 1, 1999)), 1);
+		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(2, 1, 1999)), 2);
 		// Edge cases
 		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(31, 12, 2001)), 365);
 		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(31, 12, 2999)), 365);
 		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(1, 1, 2999)), 1);
-		
 		// Leap year
-		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(29, 2, 2004)),60);
-		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(31, 12, 2004)),366);
+		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(29, 2, 2004)), 60);
+		assertEquals(dateCalculator.daysFromStartOfYear(new DateDTO(31, 12, 2004)), 366);
 	}
 
 	@Test
